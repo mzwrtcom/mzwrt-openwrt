@@ -200,7 +200,7 @@ jobs:
         gh release create ${{ steps.generate_name.outputs.RELEASE_NAME }} \
               ./${{ steps.generate_name.outputs.RELEASE_NAME }}/* \
               --title "Release ${{ steps.generate_name.outputs.RELEASE_NAME }}" \
-              --body "### 更新内容\n- 新增了 X 功能\n- 修复了 Y bug\n- 提升了性能\n\n### 版本信息\n- 编译时间：2026-01-06\n- 作者：GitHub Actions"
+              --body "CMCC RAX 3000M"
     
       env:
         # 使用 Personal Access Token 进行身份验证
