@@ -178,13 +178,13 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: CMCC-RAX3000M-MzWrt
-        path: /mnt/openwrt/openwrt/bin/targets/mediatek/filogic${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
+        path: /mnt/openwrt/openwrt/bin/targets/mediatek/filogic/${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
 
     # 12. Create Release & Upload
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: /mnt/openwrt/openwrt/bin/targets/mediatek/filogic${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
+        artifacts: /mnt/openwrt/openwrt/bin/targets/mediatek/filogic/${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
         name: ${{ steps.generate_name.outputs.RELEASE_NAME }}
         tag: ${{ steps.generate_name.outputs.RELEASE_TAG }}
         body: CMCC-RAX3000M NAND firmware
