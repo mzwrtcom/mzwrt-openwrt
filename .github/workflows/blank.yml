@@ -62,14 +62,12 @@ jobs:
         sudo timedatectl set-timezone "Asia/Shanghai"
         git config --global user.name 'GitHub Actions' && git config --global user.email '${{ secrets.GH_MAIL }}'
         
-        curl -L https://install.perlbrew.pl | bash
-        source ~/perl5/perlbrew/etc/bashrc
-        perlbrew install perl-5.40.0
-        perlbrew switch perl-5.40.0
-        source ~/perl5/perlbrew/etc/bashrc
-        echo "================================="
-        export PATH="$HOME/perl5/perlbrew/perls/perl-5.40.0/bin:$PATH"
-        source ~/.bashrc
+        # 复制并运行 Perl-update.sh 脚本
+        cp -f ../mzwrt-openwrt/Perl-update.sh ./
+
+        # 给 Perl-update.sh 脚本添加执行权限并运行
+        chmod +x ./Perl-update.sh
+        ./Perl-update.sh
 
 
         perl -v
