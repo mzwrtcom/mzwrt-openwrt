@@ -66,8 +66,8 @@ jobs:
         cp -f ../mzwrt-openwrt/Perl-update.sh ./
 
         # 给 Perl-update.sh 脚本添加执行权限并运行
-        chmod +x ./Perl-update.sh
-        ./Perl-update.sh
+        chmod +x /mnt/openwrt/mzwrt-openwrt/Perl-update.sh
+        ./mnt/openwrt/mzwrt-openwrt/Perl-update.sh
 
 
         perl -v
