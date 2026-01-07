@@ -43,11 +43,6 @@ jobs:
       run: |
         sudo chown -R $USER:$USER ./mzwrt-openwrt
         sudo mv ./mzwrt-openwrt /mnt/openwrt/
-        sudo apt-get -yqq update
-        sudo apt -yqq install tree
-        echo "================================="
-        tree /mnt/openwrt/
-        echo "================================="
 
     # 3. Initialization environment
     - name: Initialization environment
@@ -69,8 +64,9 @@ jobs:
         
         # 复制并运行 Perl-update.sh 脚本
         # 给 Perl-update.sh 脚本添加执行权限并运行
-        chmod +x /mnt/openwrt/mzwrt-openwrt/Perl-update.sh
-        ./mnt/openwrt/mzwrt-openwrt/Perl-update.sh
+        cd /mnt/openwrt/mzwrt-openwrt/
+        chmod +x ./Perl-update.sh
+        ./Perl-update.sh
 
 
         perl -v
