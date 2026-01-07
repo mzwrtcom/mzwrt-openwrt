@@ -68,6 +68,9 @@ jobs:
         perlbrew switch perl-5.40.0
         source ~/perl5/perlbrew/etc/bashrc
         echo "================================="
+        export PATH="$HOME/perl5/perlbrew/perls/perl-5.40.0/bin:$PATH"
+        source ~/.bashrc
+
 
         perl -v
         echo "================================="
