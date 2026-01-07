@@ -49,6 +49,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        sudo -E apt-get -y purge azure-cli* docker* ghc* zulu* hhvm* llvm* firefox* google* dotnet* aspnetcore* powershell* openjdk* adoptopenjdk* mysql* php* mongodb* moby* snap* || true
         sudo apt-get update
         sudo apt-get -yqq upgrade
         sudo apt-get -yqq full-upgrade
@@ -60,7 +61,7 @@ jobs:
         sudo systemctl daemon-reload
         sudo timedatectl set-timezone "Asia/Shanghai"
         git config --global user.name 'GitHub Actions' && git config --global user.email '${{ secrets.GH_MAIL }}'
-        echo "yes" | sudo cpan -fi File::Spec::Functions
+        echo "yes" | sudo cpan -i File::Spec::Functions
 
     # 4. Clone source code
     - name: Clone source code
