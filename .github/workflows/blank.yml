@@ -43,8 +43,8 @@ jobs:
       run: |
         sudo chown -R $USER:$USER ./mzwrt-openwrt
         sudo mv ./mzwrt-openwrt /mnt/openwrt/
-        sudo apt-get update
-        sudo apt install tree
+        sudo apt-get -yqq update
+        sudo apt -yqq install tree
         echo "================================="
         tree /mnt/openwrt/
         echo "================================="
