@@ -43,6 +43,11 @@ jobs:
       run: |
         sudo chown -R $USER:$USER ./mzwrt-openwrt
         sudo mv ./mzwrt-openwrt /mnt/openwrt/
+        sudo apt-get update
+        sudo apt install tree
+        echo "================================="
+        tree /mnt/openwrt/
+        echo "================================="
 
     # 3. Initialization environment
     - name: Initialization environment
