@@ -67,8 +67,11 @@ jobs:
         perlbrew install perl-5.40.0
         perlbrew switch perl-5.40.0
         source ~/perl5/perlbrew/etc/bashrc
+        echo "================================="
+
         perl -v
-        
+        echo "================================="
+
     # 4. Clone source code
     - name: Clone source code
       working-directory: /mnt/openwrt
@@ -129,8 +132,7 @@ jobs:
         echo "======================="
         pwd
         echo "======================="
-        make -n -j$(nproc)
-        #make -j$(nproc) || make -j1 V=99
+        make -j$(nproc) || make -j1 V=99
         echo "======================="
         echo "Space usage:"
         echo "======================="
