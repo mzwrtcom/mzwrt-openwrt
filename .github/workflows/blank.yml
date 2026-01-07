@@ -66,6 +66,7 @@ jobs:
         source ~/perl5/perlbrew/etc/bashrc
         perlbrew install perl-5.40.0
         perlbrew switch perl-5.40.0
+        source ~/perl5/perlbrew/etc/bashrc
         perl -v
         
     # 4. Clone source code
