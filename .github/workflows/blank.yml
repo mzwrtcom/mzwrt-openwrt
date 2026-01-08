@@ -43,6 +43,8 @@ jobs:
       run: |
         sudo chown -R $USER:$USER ./mzwrt-openwrt
         sudo mv ./mzwrt-openwrt /mnt/openwrt/
+        sudo chown -R $USER:$USER /mnt/openwrt
+
 
     # 3. Initialization environment
     - name: Initialization environment
@@ -84,8 +86,8 @@ jobs:
         echo "======================="
         df -h
         echo "======================="
-        ./scripts/feeds update -a -v
-        ./scripts/feeds install -a -v
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
         # cp -f ../mzwrt-openwrt/diy2.sh ./
         # chmod +x ./diy2.sh && ./diy2.sh 
 
