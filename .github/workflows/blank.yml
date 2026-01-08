@@ -122,7 +122,8 @@ jobs:
         echo "======================="
         pwd
         echo "======================="
-        make -j$(nproc) || make -j1 V=99
+        #make -j$(nproc) || make -j1 V=99
+        make -j$(nproc) V=99
         echo "======================="
         echo "Space usage:"
         echo "======================="
@@ -140,8 +141,8 @@ jobs:
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
         release_name="MzWrt-CMCC-RAX3000M-$(date +%Y%m%d)"
-        echo "release_tag=$release_tag" >> $GITHUB_ENV
-        echo "release_name=$release_name" >> $GITHUB_ENV
+        echo "RELEASE_TAG=$release_tag" >> $GITHUB_OUTPUT
+        echo "RELEASE_NAME=$release_name" >> $GITHUB_OUTPUT
 
     # 10. Prepare Firmware
     - name: Prepare Firmware
@@ -174,14 +175,16 @@ jobs:
         fi
 
 
-        mkdir -p ./${{ steps.generate_name.outputs.release_name }}
-        cp -r ./bin/targets/mediatek/filogic/*.{bin,tar.gz} ./${{ steps.generate_name.outputs.release_name }}/
+        mkdir -p ./${{ steps.generate_name.outputs.RELEASE_NAME }}
+        cp -r ./bin/targets/mediatek/filogic/*.{bin,tar.gz} ./${{ steps.generate_name.outputs.RELEASE_NAME }}/
         echo "======================="
 
-        echo "Release name: ${{ steps.generate_name.outputs.release_name }}"
+        echo "Release name: ${{ steps.generate_name.outputs.RELEASE_NAME }}"
+        echo "Release name: ${{ steps.generate_name.outputs.RELEASE_TAG }}"
+
         echo "======================="
 
-        ls ./${{ steps.generate_name.outputs.release_name }}/
+        ls ./${{ steps.generate_name.outputs.RELEASE_NAME }}/
         echo "======================="
 
 
@@ -191,15 +194,15 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: CMCC-RAX3000M-MzWrt
-        path: /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.release_name }}/*.{bin,tar.gz}
+        path: /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
 
     # 12. Create Release & Upload
     - name: Create Release & Upload
       uses: ncipollo/release-action@v1.14.0
       with:
-        artifacts: /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.release_name }}/*.{bin,tar.gz}
-        name: ${{ steps.generate_name.outputs.release_name }}
-        tag: ${{ steps.generate_name.outputs.release_tag }}
+        artifacts: /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz}
+        name: ${{ steps.generate_name.outputs.RELEASE_NAME }}
+        tag: ${{ steps.generate_name.outputs.RELEASE_TAG }}
         body: CMCC-RAX3000M NAND firmware
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -208,9 +211,9 @@ jobs:
         # 克隆 B 仓库并推送
         git clone https://github.com/mzwrt/mzwrt-openwrt.git
         cd mzwrt-openwrt
-        gh release create ${{ steps.generate_name.outputs.release_tag }} \
-              /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.release_name }}/*.{bin,tar.gz} \
-              --title "Release ${{ steps.generate_name.outputs.release_name }}" \
+        gh release create ${{ steps.generate_name.outputs.RELEASE_TAG }} \
+              /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.RELEASE_NAME }}/*.{bin,tar.gz} \
+              --title "Release ${{ steps.generate_name.outputs.RELEASE_NAME }}" \
               --body "CMCC RAX 3000M"
       env:
         # 使用 Personal Access Token 进行身份验证
