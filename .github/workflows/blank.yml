@@ -79,8 +79,8 @@ jobs:
     - name: Update & Install feeds
       working-directory: /mnt/openwrt/openwrt
       run: |
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
+        ./scripts/feeds update -a -v
+        ./scripts/feeds install -a -v
         # cp -f ../mzwrt-openwrt/diy2.sh ./
         # chmod +x ./diy2.sh && ./diy2.sh 
 
