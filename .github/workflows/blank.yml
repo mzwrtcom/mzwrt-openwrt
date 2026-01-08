@@ -43,8 +43,6 @@ jobs:
       run: |
         sudo chown -R $USER:$USER ./mzwrt-openwrt
         sudo mv ./mzwrt-openwrt /mnt/openwrt/
-        sudo chown -R $USER:$USER /mnt/openwrt
-
 
     # 3. Initialization environment
     - name: Initialization environment
@@ -75,21 +73,16 @@ jobs:
         git clone -b $OPENWRT_VERSION --single-branch --depth=1 $REPO_URL $OPENWRT_DIR
         cd openwrt
         cp -f ../mzwrt-openwrt/diy1.sh ./
-        # chmod +x ./diy1.sh && ./diy1.sh
+        chmod +x ./diy1.sh && ./diy1.sh
 
     # 5. Update & Install feeds
     - name: Update & Install feeds
       working-directory: /mnt/openwrt/openwrt
       run: |
-        echo "======================="
-        echo "Space usage:"
-        echo "======================="
-        df -h
-        echo "======================="
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        # cp -f ../mzwrt-openwrt/diy2.sh ./
-        # chmod +x ./diy2.sh && ./diy2.sh 
+        cp -f ../mzwrt-openwrt/diy2.sh ./
+        chmod +x ./diy2.sh && ./diy2.sh 
 
     # 6. Configuration Customization
     - name: Configuration Customization - Build_mt7981_rax3000m
