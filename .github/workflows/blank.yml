@@ -75,7 +75,7 @@ jobs:
         git clone -b $OPENWRT_VERSION --single-branch --depth=1 $REPO_URL $OPENWRT_DIR
         cd openwrt
         cp -f ../mzwrt-openwrt/diy1.sh ./
-        chmod +x ./diy1.sh && ./diy1.sh
+        # chmod +x ./diy1.sh && ./diy1.sh
 
     # 5. Update & Install feeds
     - name: Update & Install feeds
