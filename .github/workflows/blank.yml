@@ -209,7 +209,7 @@ jobs:
         git clone https://github.com/mzwrt/mzwrt-openwrt.git
         cd mzwrt-openwrt
         gh release create ${{ steps.generate_name.outputs.release_tag }} \
-              /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.release_name }}/*.{bin,tar.gz}
+              /mnt/openwrt/openwrt/${{ steps.generate_name.outputs.release_name }}/*.{bin,tar.gz} \
               --title "Release ${{ steps.generate_name.outputs.release_name }}" \
               --body "CMCC RAX 3000M"
       env:
